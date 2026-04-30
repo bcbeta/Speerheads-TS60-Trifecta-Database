@@ -153,16 +153,6 @@ function entryDayLabel(entry) {
   return entry.week ? `W${entry.week}` : "Class";
 }
 
-function workoutMeta(entry) {
-  const parts = [entry.workoutType];
-  if (entry.startTime && entry.stopTime) parts.push(`${entry.startTime} - ${entry.stopTime}`);
-  if (entry.instructor) parts.push(entry.instructor);
-  if (entry.notes && !["link", "tbd"].includes(entry.notes.toLowerCase())) parts.push(entry.notes);
-  if (entry.classDateDisplay) parts.push(`Class date ${entry.classDateDisplay}`);
-  if (entry.scheduledDate) parts.push(`Scheduled ${entry.scheduledDate}`);
-  return parts.map((part) => `<span>${escapeHtml(part)}</span>`).join("");
-}
-
 function renderEntry(entry) {
   const link = entry.url
     ? `<a class="workout-link" href="${escapeHtml(entry.url)}" target="_blank" rel="noopener">Open</a>`
@@ -173,7 +163,6 @@ function renderEntry(entry) {
       <span class="day-tag">${escapeHtml(entryDayLabel(entry))}</span>
       <div>
         <div class="workout-title">${escapeHtml(entry.workout)}</div>
-        <div class="workout-meta">${workoutMeta(entry)}</div>
       </div>
       ${link}
     </div>
