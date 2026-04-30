@@ -295,13 +295,17 @@ a.workout-link:hover {
 
 .workout-row {
   display: grid;
-  grid-template-columns: minmax(82px, 120px) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 14px;
   align-items: center;
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #ffffff;
+}
+
+.workout-row.has-day-tag {
+  grid-template-columns: minmax(82px, 120px) minmax(0, 1fr) auto;
 }
 
 .day-tag {
@@ -391,6 +395,7 @@ footer {
   }
 
   .workout-row,
+  .workout-row.has-day-tag,
   .schedule-head {
     grid-template-columns: 1fr;
   }

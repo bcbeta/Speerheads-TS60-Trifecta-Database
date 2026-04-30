@@ -150,17 +150,19 @@ function entryDayLabel(entry) {
   }
   if (entry.dayLabel) return entry.dayLabel;
   if (entry.day) return `Day ${entry.day}`;
-  return entry.week ? `W${entry.week}` : "Class";
+  return "";
 }
 
 function renderEntry(entry) {
   const link = entry.url
     ? `<a class="workout-link" href="${escapeHtml(entry.url)}" target="_blank" rel="noopener">Open</a>`
     : `<span class="missing-link">${entry.linkStatus === "tbd" ? "TBD" : "No link"}</span>`;
+  const dayLabel = entryDayLabel(entry);
+  const dayTag = dayLabel ? `<span class="day-tag">${escapeHtml(dayLabel)}</span>` : "";
 
   return `
-    <div class="workout-row">
-      <span class="day-tag">${escapeHtml(entryDayLabel(entry))}</span>
+    <div class="workout-row${dayLabel ? " has-day-tag" : ""}">
+      ${dayTag}
       <div>
         <div class="workout-title">${escapeHtml(entry.workout)}</div>
       </div>
