@@ -1,0 +1,20 @@
+WINTER TS60 TRIFECTA
+Week	Class
+1	Current TS60 (1/5/25)
+1	Spring Deadlift TS60 (3/3/24)
+1	Metabolic Muscle TS60 (5/5/24)
+2	Current TS60 (1/12/25)
+2	Spring Deadlift TS60 (03/10/24)
+2	Metabolic Muscle TS60 (5/12/24)
+3	Current TS60 (1/19/25)
+3	Spring Deadlift TS60 (3/17/24)
+3	Metabolic Muscle TS60 (5/19/24)
+4	Current TS60 (1/26/25)
+4	Spring Deadlift TS60 (3/24/24)
+4	Metabolic Muscle TS60 (5/26/24)
+5	Current TS60 (2/2/25)
+5	Spring Deadlift TS60 (3/31/24)
+5	10/9/22
+6	Current TS60 (2/9/25)
+6	5/7/23
+6	5/29/22

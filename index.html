@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Speerheads TS60 Trifecta Database</title>
+    <link rel="stylesheet" href="styles.css?v=20260430-13">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-copy">
+        <p class="eyebrow">Andy Speer strength schedules</p>
+        <h1>Speerheads TS60 Trifecta Database</h1>
+      </div>
+    </header>
+
+    <main>
+      <section class="controls" aria-label="Schedule filters">
+        <label class="search-field">
+          <span>Search</span>
+          <input id="searchInput" type="search" placeholder="Class, month, week, instructor">
+        </label>
+
+        <label>
+          <span>Year</span>
+          <select id="yearFilter"></select>
+        </label>
+
+        <label>
+          <span>Type</span>
+          <select id="categoryFilter">
+            <option value="all">All schedules</option>
+            <option value="trifecta">TS60 Trifecta</option>
+            <option value="core">Core challenges</option>
+            <option value="stride">Stride</option>
+          </select>
+        </label>
+
+      </section>
+
+      <section class="layout">
+        <aside class="jump-panel">
+          <h2>Jump To</h2>
+          <div id="jumpList"></div>
+        </aside>
+
+        <section class="results" aria-live="polite">
+          <div class="results-bar">
+            <h2 id="resultsTitle">Schedules</h2>
+          </div>
+          <div id="scheduleList"></div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <p>Peloton links open on members.onepeloton.com.</p>
+    </footer>
+
+    <script src="app.js?v=20260430-13" defer></script>
+  </body>
+</html>
