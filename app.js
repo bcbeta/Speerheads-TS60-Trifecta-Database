@@ -175,20 +175,11 @@ function renderGroup(group, schedule) {
 }
 
 function renderSchedule(schedule) {
-  const entries = schedule.groups.flatMap((group) => group.entries);
-  const linked = entries.filter((entry) => entry.url).length;
-  const categoryClass = schedule.category === "core" ? "gold" : schedule.category === "stride" ? "" : "red";
   return `
     <article class="schedule-card" id="${scheduleAnchorId(schedule)}">
       <header class="schedule-head">
         <div>
           <h3>${escapeHtml(schedule.title)}</h3>
-          <div class="schedule-meta">
-            <span class="pill ${categoryClass}">${formatCategory(schedule.category)}</span>
-            <span class="pill">${formatPeriod(schedule.period)}</span>
-            <span class="pill">${entries.length} workouts</span>
-            <span class="pill">${linked} links</span>
-          </div>
         </div>
       </header>
       ${schedule.groups.map((group) => renderGroup(group, schedule)).join("")}

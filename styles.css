@@ -161,37 +161,9 @@ a.workout-link:hover {
 }
 
 .schedule-head h3 {
-  margin-bottom: 6px;
+  margin-bottom: 0;
   font-size: 1.35rem;
   line-height: 1.15;
-}
-
-.schedule-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 26px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: var(--soft-teal);
-  color: #126a65;
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
-.pill.gold {
-  background: var(--soft-gold);
-  color: #8b5d05;
-}
-
-.pill.red {
-  background: #ffe7ea;
-  color: #a72230;
 }
 
 .group {
