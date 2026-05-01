@@ -1,14 +1,10 @@
 const state = {
   data: null,
   search: "",
-  year: "all",
-  category: "all",
 };
 
 const els = {
   search: document.querySelector("#searchInput"),
-  year: document.querySelector("#yearFilter"),
-  category: document.querySelector("#categoryFilter"),
   jump: document.querySelector("#jumpSelect"),
   list: document.querySelector("#scheduleList"),
   title: document.querySelector("#resultsTitle"),
@@ -75,8 +71,6 @@ function sortSchedulesForDisplay(schedules) {
 function filteredSchedules() {
   const needle = state.search.trim().toLowerCase();
   return sortSchedulesForDisplay(state.data.schedules)
-    .filter((schedule) => state.year === "all" || schedule.year === state.year)
-    .filter((schedule) => state.category === "all" || schedule.category === state.category)
     .map((schedule) => ({
       ...schedule,
       groups: schedule.groups
@@ -87,17 +81,6 @@ function filteredSchedules() {
         .filter((group) => group.entries.length),
     }))
     .filter((schedule) => schedule.groups.length);
-}
-
-function renderFilters() {
-  const years = [...new Set(state.data.schedules.map((schedule) => schedule.year))].sort();
-  els.year.innerHTML = [
-    '<option value="all">All years</option>',
-    ...years.map((year) => `<option value="${year}">${year}</option>`),
-  ].join("");
-
-  els.year.value = state.year;
-  els.category.value = state.category;
 }
 
 function jumpLabel(schedule) {
@@ -226,7 +209,6 @@ function renderResults() {
 }
 
 function renderAll() {
-  renderFilters();
   renderResults();
 }
 
@@ -236,22 +218,10 @@ function attachEvents() {
     renderResults();
   });
 
-  els.year.addEventListener("change", (event) => {
-    state.year = event.target.value;
-    renderAll();
-  });
-
-  els.category.addEventListener("change", (event) => {
-    state.category = event.target.value;
-    renderAll();
-  });
-
   els.jump.addEventListener("change", (event) => {
     const scheduleId = event.target.value;
     if (!scheduleId) return;
     state.search = "";
-    state.year = "all";
-    state.category = "all";
     els.search.value = "";
     renderAll();
     els.jump.value = scheduleId;
