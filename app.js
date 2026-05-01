@@ -9,8 +9,8 @@ const els = {
   search: document.querySelector("#searchInput"),
   year: document.querySelector("#yearFilter"),
   category: document.querySelector("#categoryFilter"),
+  jump: document.querySelector("#jumpSelect"),
   list: document.querySelector("#scheduleList"),
-  jumps: document.querySelector("#jumpList"),
   title: document.querySelector("#resultsTitle"),
 };
 
@@ -105,28 +105,25 @@ function jumpLabel(schedule) {
   return schedule.title;
 }
 
-function renderJumpLinks() {
+function renderJumpSelect() {
   const categories = ["trifecta", "core", "stride"];
-  els.jumps.innerHTML = categories
-    .map((category) => {
+  els.jump.innerHTML = [
+    '<option value="">Choose section...</option>',
+    ...categories.map((category) => {
       const schedules = sortSchedulesForDisplay(state.data.schedules).filter((schedule) => schedule.category === category);
       if (!schedules.length) return "";
       return `
-        <nav class="jump-group" aria-label="${escapeHtml(formatCategory(category))}">
-          <h3>${escapeHtml(formatCategory(category))}</h3>
+        <optgroup label="${escapeHtml(formatCategory(category))}">
           ${schedules
             .map(
-              (schedule) => `
-                <a class="jump-link" href="#${scheduleAnchorId(schedule)}" data-schedule-id="${escapeHtml(schedule.id)}">
-                  <strong>${escapeHtml(jumpLabel(schedule))}</strong>
-                </a>
-              `,
+              (schedule) =>
+                `<option value="${escapeHtml(schedule.id)}">${escapeHtml(jumpLabel(schedule))}</option>`,
             )
             .join("")}
-        </nav>
+        </optgroup>
       `;
-    })
-    .join("");
+    }),
+  ].join("");
 }
 
 function groupEntriesByWeek(entries) {
@@ -249,16 +246,16 @@ function attachEvents() {
     renderAll();
   });
 
-  els.jumps.addEventListener("click", (event) => {
-    const link = event.target.closest(".jump-link");
-    if (!link) return;
-    event.preventDefault();
+  els.jump.addEventListener("change", (event) => {
+    const scheduleId = event.target.value;
+    if (!scheduleId) return;
     state.search = "";
     state.year = "all";
     state.category = "all";
     els.search.value = "";
     renderAll();
-    document.getElementById(scheduleAnchorId({ id: link.dataset.scheduleId }))?.scrollIntoView({
+    els.jump.value = scheduleId;
+    document.getElementById(scheduleAnchorId({ id: scheduleId }))?.scrollIntoView({
       block: "start",
       behavior: "smooth",
     });
@@ -270,7 +267,7 @@ async function init() {
     const response = await fetch("data/schedules.json");
     if (!response.ok) throw new Error(`Failed to load schedule data: ${response.status}`);
     state.data = await response.json();
-    renderJumpLinks();
+    renderJumpSelect();
     renderAll();
     attachEvents();
   } catch (error) {
